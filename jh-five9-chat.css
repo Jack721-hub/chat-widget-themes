@@ -1,0 +1,429 @@
+/* ============================================================================
+   JH Enterprises — Five9 Chat Widget theme
+   ----------------------------------------------------------------------------
+   Prepared by Onecom as an illustrative example.
+
+   How to use:
+     1. Host this file on HTTPS (customer CDN, S3 + CloudFront, or the JH Enterprises
+        web estate). It must be reachable by every visitor's browser.
+     2. In the Five9 Chat Script Generator set:
+          Theme                -> Use Custom CSS File
+          Custom CSS File URL  -> https://<your-host>/jh-five9-chat.css
+          SRI Hash             -> see "Integrity hash" note at the bottom
+          Logo File URL        -> Enable + https://<your-host>/jh-logo.svg
+     3. Re-generate the integrity hash every time this file changes, or the
+        browser will silently refuse to load it.
+
+   Colour values below are an approximation of the JH Enterprises red/white/grey
+   identity. Replace the four brand tokens with the exact values from the
+   JH Enterprises brand guidelines before go-live — everything else inherits.
+   ========================================================================= */
+
+:root {
+  /* --- Brand tokens: the only values you normally need to change --------- */
+  --cx-red:          #D6001C;   /* primary brand red   */
+  --cx-red-dark:     #A30016;   /* hover / pressed     */
+  --cx-charcoal:     #333F48;   /* headings + body     */
+  --cx-grey-line:    #D8DCDF;   /* borders, dividers   */
+
+  /* --- Derived surface tokens ------------------------------------------- */
+  --cx-white:        #FFFFFF;
+  --cx-grey-bg:      #F4F5F6;   /* widget background   */
+  --cx-grey-bubble:  #EDEFF1;   /* agent message       */
+  --cx-muted:        #6B767F;   /* timestamps, hints   */
+  --cx-focus:        #1A73E8;   /* keyboard focus ring */
+
+  /* --- Type ------------------------------------------------------------- */
+  --cx-font: "Helvetica Neue", Helvetica, Arial, "Segoe UI", system-ui, sans-serif;
+  --cx-size-body: 14px;
+  --cx-size-small: 12px;
+
+  /* --- Shape ------------------------------------------------------------ */
+  --cx-radius:       6px;
+  --cx-radius-pill:  999px;
+  --cx-shadow:       0 6px 24px rgba(51, 63, 72, 0.22);
+}
+
+/* ============================================================================
+   1. Launcher button (the tab / bubble before the visitor opens chat)
+   ========================================================================= */
+
+.five9-chat-button,
+#five9-maximize-button,
+.five9-chat-button-container {
+  background-color: var(--cx-red) !important;
+  color: var(--cx-white) !important;
+  border: none !important;
+  border-radius: var(--cx-radius) var(--cx-radius) 0 0 !important;
+  font-family: var(--cx-font) !important;
+  font-size: var(--cx-size-body) !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+  box-shadow: var(--cx-shadow) !important;
+  transition: background-color 120ms ease-in-out;
+}
+
+.five9-chat-button:hover,
+#five9-maximize-button:hover {
+  background-color: var(--cx-red-dark) !important;
+  cursor: pointer;
+}
+
+.five9-chat-button:focus-visible,
+#five9-maximize-button:focus-visible {
+  outline: 3px solid var(--cx-focus) !important;
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+   2. Widget frame
+   ========================================================================= */
+
+.five9-frame,
+#five9-frame,
+.five9-chat-window {
+  font-family: var(--cx-font) !important;
+  font-size: var(--cx-size-body) !important;
+  color: var(--cx-charcoal) !important;
+  background: var(--cx-grey-bg) !important;
+  border: 1px solid var(--cx-grey-line) !important;
+  border-radius: var(--cx-radius) !important;
+  box-shadow: var(--cx-shadow) !important;
+  overflow: hidden;
+}
+
+/* ============================================================================
+   3. Title bar — red band, white wordmark, white controls
+   ========================================================================= */
+
+.five9-chat-titleBar,
+.five9-header,
+.five9-title {
+  background: var(--cx-red) !important;
+  color: var(--cx-white) !important;
+  border-bottom: none !important;
+  min-height: 52px;
+  padding: 0 12px !important;
+  display: flex !important;
+  align-items: center !important;
+}
+
+.five9-chat-titleText,
+.five9-title-text {
+  color: var(--cx-white) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.01em;
+}
+
+/* Logo supplied via the "Logo File URL" field. Constrain it so tall or wide
+   assets don't stretch the title bar. Supply a transparent SVG or a 2x PNG. */
+.five9-logo,
+.five9-chat-titleBar img,
+.five9-header img {
+  max-height: 28px !important;
+  width: auto !important;
+  margin-right: 10px;
+}
+
+/* Minimise / end-chat / print icons */
+.five9-minimize,
+.five9-maximize,
+.five9-end-chat,
+.five9-controls button,
+.five9-chat-titleBar button {
+  color: var(--cx-white) !important;
+  fill: var(--cx-white) !important;
+  background: transparent !important;
+  border: none !important;
+  opacity: 0.85;
+}
+
+.five9-controls button:hover,
+.five9-chat-titleBar button:hover {
+  opacity: 1;
+  cursor: pointer;
+}
+
+/* ============================================================================
+   4. Pre-chat form
+   ========================================================================= */
+
+.five9-form,
+.five9-prechat-form {
+  background: var(--cx-white) !important;
+  padding: 16px !important;
+}
+
+.five9-form-label,
+.five9-label {
+  color: var(--cx-charcoal) !important;
+  font-size: var(--cx-size-small) !important;
+  font-weight: 600 !important;
+  margin-bottom: 4px !important;
+}
+
+.five9-text-field,
+.five9-form-input,
+.five9-input-field,
+.five9-dropdown,
+.five9-frame input[type="text"],
+.five9-frame input[type="email"],
+.five9-frame select,
+.five9-frame textarea {
+  width: 100% !important;
+  background: var(--cx-white) !important;
+  color: var(--cx-charcoal) !important;
+  border: 1px solid var(--cx-grey-line) !important;
+  border-radius: var(--cx-radius) !important;
+  padding: 9px 10px !important;
+  font-family: var(--cx-font) !important;
+  font-size: var(--cx-size-body) !important;
+  box-shadow: none !important;
+}
+
+.five9-text-field:focus,
+.five9-form-input:focus,
+.five9-input-field:focus,
+.five9-frame input:focus,
+.five9-frame select:focus,
+.five9-frame textarea:focus {
+  border-color: var(--cx-red) !important;
+  outline: 2px solid rgba(214, 0, 28, 0.25) !important;
+  outline-offset: 0;
+}
+
+.five9-frame ::placeholder {
+  color: var(--cx-muted) !important;
+  opacity: 1;
+}
+
+/* Validation */
+.five9-error,
+.five9-field-error {
+  color: var(--cx-red-dark) !important;
+  font-size: var(--cx-size-small) !important;
+}
+
+/* ============================================================================
+   5. Buttons
+   ========================================================================= */
+
+.five9-btn,
+.five9-button,
+.five9-send-button,
+.five9-frame button[type="submit"] {
+  background: var(--cx-red) !important;
+  color: var(--cx-white) !important;
+  border: 1px solid var(--cx-red) !important;
+  border-radius: var(--cx-radius) !important;
+  font-family: var(--cx-font) !important;
+  font-size: var(--cx-size-body) !important;
+  font-weight: 600 !important;
+  padding: 9px 18px !important;
+  transition: background-color 120ms ease-in-out;
+}
+
+.five9-btn:hover,
+.five9-button:hover,
+.five9-send-button:hover {
+  background: var(--cx-red-dark) !important;
+  border-color: var(--cx-red-dark) !important;
+  cursor: pointer;
+}
+
+/* Secondary action (cancel, end chat, no thanks) */
+.five9-btn-secondary,
+.five9-btn.five9-cancel {
+  background: var(--cx-white) !important;
+  color: var(--cx-charcoal) !important;
+  border: 1px solid var(--cx-grey-line) !important;
+}
+
+.five9-btn-secondary:hover,
+.five9-btn.five9-cancel:hover {
+  background: var(--cx-grey-bg) !important;
+}
+
+.five9-btn:disabled {
+  background: var(--cx-grey-line) !important;
+  border-color: var(--cx-grey-line) !important;
+  color: var(--cx-muted) !important;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+   6. Conversation
+   ========================================================================= */
+
+.five9-messages,
+.five9-rows,
+.five9-chat-body {
+  background: var(--cx-grey-bg) !important;
+  padding: 12px !important;
+}
+
+.five9-message,
+.five9-message-item {
+  font-size: var(--cx-size-body) !important;
+  line-height: 1.45 !important;
+  margin-bottom: 10px !important;
+}
+
+/* Agent / system side */
+.five9-message-agent,
+.five9-agent-message,
+.five9-message.five9-incoming {
+  background: var(--cx-grey-bubble) !important;
+  color: var(--cx-charcoal) !important;
+  border-radius: var(--cx-radius) var(--cx-radius) var(--cx-radius) 2px !important;
+  padding: 9px 12px !important;
+  max-width: 82%;
+}
+
+/* Visitor side */
+.five9-message-visitor,
+.five9-my-message,
+.five9-message.five9-outgoing {
+  background: var(--cx-red) !important;
+  color: var(--cx-white) !important;
+  border-radius: var(--cx-radius) var(--cx-radius) 2px var(--cx-radius) !important;
+  padding: 9px 12px !important;
+  max-width: 82%;
+  margin-left: auto;
+}
+
+.five9-message-visitor a,
+.five9-my-message a {
+  color: var(--cx-white) !important;
+  text-decoration: underline;
+}
+
+.five9-message-username,
+.five9-message-header {
+  color: var(--cx-muted) !important;
+  font-size: var(--cx-size-small) !important;
+  font-weight: 600 !important;
+}
+
+.five9-message-timestamp,
+.five9-timestamp {
+  color: var(--cx-muted) !important;
+  font-size: 11px !important;
+}
+
+/* System notices — "You are number 2 in the queue", "Agent has joined" */
+.five9-system-message,
+.five9-notification {
+  color: var(--cx-muted) !important;
+  font-size: var(--cx-size-small) !important;
+  text-align: center;
+  border-top: 1px solid var(--cx-grey-line);
+  border-bottom: 1px solid var(--cx-grey-line);
+  padding: 6px 0 !important;
+  margin: 10px 0 !important;
+}
+
+/* Typing indicator */
+.five9-typing,
+.five9-agent-typing {
+  color: var(--cx-muted) !important;
+  font-size: var(--cx-size-small) !important;
+  font-style: italic;
+}
+
+/* ============================================================================
+   7. Composer
+   ========================================================================= */
+
+.five9-chat-input,
+.five9-input-container,
+.five9-composer {
+  background: var(--cx-white) !important;
+  border-top: 1px solid var(--cx-grey-line) !important;
+  padding: 10px !important;
+}
+
+.five9-chat-input textarea {
+  border: 1px solid var(--cx-grey-line) !important;
+  border-radius: var(--cx-radius) !important;
+  resize: none !important;
+}
+
+/* ============================================================================
+   8. Scrollbar (WebKit / Chromium)
+   ========================================================================= */
+
+.five9-messages::-webkit-scrollbar,
+.five9-rows::-webkit-scrollbar {
+  width: 8px;
+}
+
+.five9-messages::-webkit-scrollbar-thumb,
+.five9-rows::-webkit-scrollbar-thumb {
+  background: var(--cx-grey-line);
+  border-radius: var(--cx-radius-pill);
+}
+
+/* ============================================================================
+   9. Small screens
+   ========================================================================= */
+
+@media (max-width: 480px) {
+  .five9-frame,
+  #five9-frame,
+  .five9-chat-window {
+    width: 100% !important;
+    max-width: 100% !important;
+    height: 100% !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
+
+  .five9-message-agent,
+  .five9-message-visitor {
+    max-width: 90%;
+  }
+}
+
+/* ============================================================================
+   10. Accessibility
+   ========================================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+  .five9-chat-button,
+  .five9-btn,
+  #five9-maximize-button {
+    transition: none !important;
+  }
+}
+
+/* ============================================================================
+   Notes
+   ----------------------------------------------------------------------------
+   Class names
+     Five9 has shipped more than one generation of chat widget and the class
+     names differ between them. Load the widget on a test page, open DevTools,
+     inspect the elements, and delete or rename any selector above that does
+     not match. The duplicated selectors in each block are deliberate — they
+     cover both the legacy SocialWidget and the newer chat widget markup.
+
+   !important
+     Five9 injects its own stylesheet after this one, so overrides generally
+     need !important. Keep it.
+
+   Integrity hash
+     macOS / Linux:
+       openssl dgst -sha256 -binary jh-five9-chat.css | openssl base64 -A
+     Prefix the result with "sha256-" when pasting into the generator.
+     The hash changes with every edit, including whitespace.
+
+   Hosting
+     Serve as text/css over HTTPS. If the CSS is on a different origin to the
+     host page, the response needs Access-Control-Allow-Origin, otherwise SRI
+     verification fails and the widget falls back to the default theme.
+
+   Logo asset
+     Transparent SVG preferred, or PNG at 2x (roughly 56px tall). Keep it to
+     the wordmark only — the square icon gets lost at title-bar height.
+   ========================================================================= */
